@@ -1041,3 +1041,84 @@ window.addEventListener('DOMContentLoaded', () => {
 
     }, 3000); // 3 Seconds
 });
+
+
+
+
+
+// ==========================================
+// SOLEVA CAROUSEL & INTERACTION LOGIC
+// ==========================================
+document.addEventListener('DOMContentLoaded', () => {
+    const heroShoe = document.getElementById('heroShoeImg') || document.querySelector('.hero-shoe-wrap img');
+    const indicators = document.querySelectorAll('.indicator-btn');
+    
+    // Images list
+    const shoeList = [
+        heroShoe ? heroShoe.src : "../Assets/images/shoe.png",
+        "../Assets/images/shoe2.png",
+        "../Assets/images/shoe3.png",
+        "../Assets/images/shoe4.png"
+    ];
+
+    let currentIdx = 0;
+    let autoTimer = null;
+
+    // 1. Function to Switch Shoe & Sync Indicator
+    function switchSlide(index) {
+        if (!heroShoe) return;
+
+        // Start Fade Out
+        heroShoe.classList.add('shoe-fade-out');
+
+        // Update Active Indicator Bar (Left-to-Right Green Transfer)
+        indicators.forEach((btn, i) => {
+            if (i === index) {
+                btn.classList.add('active');
+            } else {
+                btn.classList.remove('active');
+            }
+        });
+
+        setTimeout(() => {
+            currentIdx = index;
+            heroShoe.src = shoeList[currentIdx];
+            
+            // Fade In
+            heroShoe.classList.remove('shoe-fade-out');
+        }, 500); // 0.5s fade delay
+    }
+
+    // 2. Start 5-Second Cycle
+    function startAutoLoop() {
+        if (autoTimer) clearInterval(autoTimer);
+        autoTimer = setInterval(() => {
+            let nextIdx = (currentIdx + 1) % shoeList.length;
+            switchSlide(nextIdx);
+        }, 5000); // Exactly 5 Seconds
+    }
+
+    // 3. Manual Tap on 01, 02, 03, 04 Pills
+    indicators.forEach((btn, idx) => {
+        btn.addEventListener('click', () => {
+            switchSlide(idx);
+            startAutoLoop(); // Reset 5-sec timer on manual click
+        });
+    });
+
+    // 4. Touch Shoe -> Smooth Transfer to Discover Footwear Section
+    if (heroShoe) {
+        heroShoe.addEventListener('click', () => {
+            const productSection = document.querySelector('#products') || 
+                                   document.querySelector('.discover-section') || 
+                                   document.querySelector('main');
+            
+            if (productSection) {
+                productSection.scrollIntoView({ behavior: 'smooth' });
+            }
+        });
+    }
+
+    // Start Showcase
+    startAutoLoop();
+});
