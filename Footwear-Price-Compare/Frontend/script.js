@@ -184,8 +184,7 @@ document.addEventListener("DOMContentLoaded", () => {
             image: "../Assets/images/shoe2.png",
             description:
                 "Clean streetwear style for everyday use."
-            amazonUrl: "https://www.amazon.in/SPARX-Sports-Shoe-SM-680-Grey/dp/B098B8YCZ2?th=1&psc=1&linkCode=ll2&tag=solevaindia-21&linkId=be53fcc034b6e3a1fff9db1ab6e59359&ref_=as_li_ss_tl"
-        },
+           },
       
 
         {
