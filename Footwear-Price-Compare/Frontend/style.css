@@ -3497,4 +3497,23 @@ footer p {
     100% {
         transform: translateY(0px) rotate(0deg);  /* Wapas niche aayega */
     }
+/* ==========================================
+   PURE CSS FLOATING ANIMATION
+========================================== */
+.hero-shoe-wrap, 
+.hero-shoe-wrap img, 
+.hero-image-wrap img {
+    animation: floatAnimation 3s ease-in-out infinite !important;
+}
+
+@keyframes floatAnimation {
+    0% {
+        transform: translateY(0px) rotate(0deg);
+    }
+    50% {
+        transform: translateY(-18px) rotate(-3deg); /* Shoe 18px upar float karega */
+    }
+    100% {
+        transform: translateY(0px) rotate(0deg); /* Wapas original position */
+    }
 }
