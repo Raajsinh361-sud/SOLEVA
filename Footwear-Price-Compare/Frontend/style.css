@@ -3458,3 +3458,43 @@ footer p {
     opacity: 0;
     transform: scale(0.95);
 }
+
+
+
+/* ==========================================
+   HERO SHOE FLOATING & FADE ANIMATION
+========================================== */
+
+/* Shoe ko hawa me float karwane ka container */
+.hero-shoe-wrap {
+    animation: floatShoe 3.5s ease-in-out infinite;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.hero-shoe-wrap img {
+    transition: opacity 0.5s ease, transform 0.5s ease;
+    opacity: 1;
+    max-width: 100%;
+    filter: drop-shadow(0px 15px 25px rgba(0, 0, 0, 0.6));
+}
+
+/* Jab shoe badle tab Halki si rotate + fade-out animation */
+.hero-shoe-wrap img.fade-out {
+    opacity: 0;
+    transform: scale(0.9) rotate(-6deg);
+}
+
+/* Floating Keyframes */
+@keyframes floatShoe {
+    0% {
+        transform: translateY(0px) rotate(0deg);
+    }
+    50% {
+        transform: translateY(-16px) rotate(-2deg); /* Smoothly upar jayega */
+    }
+    100% {
+        transform: translateY(0px) rotate(0deg);  /* Wapas niche aayega */
+    }
+}
