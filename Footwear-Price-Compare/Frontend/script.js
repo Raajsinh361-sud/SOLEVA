@@ -967,3 +967,35 @@ document.addEventListener(
     renderProducts();
 
 });
+
+
+// ==========================================
+// HERO SHOE AUTO SHOWCASE (2.5 SECONDS)
+// ==========================================
+const heroShoeImages = [
+    "../Assets/images/shoe.png",
+    "../Assets/images/shoe2.png",
+    "../Assets/images/shoe3.png",
+    "../Assets/images/shoe4.png"
+];
+
+let currentHeroIndex = 0;
+
+function startHeroSlideshow() {
+    const heroImageElement = document.querySelector('.hero-shoe-wrap img');
+    
+    if (!heroImageElement) return;
+
+    setInterval(() => {
+        heroImageElement.classList.add('fade-out');
+
+        setTimeout(() => {
+            currentHeroIndex = (currentHeroIndex + 1) % heroShoeImages.length;
+            heroImageElement.src = heroShoeImages[currentHeroIndex];
+            heroImageElement.classList.remove('fade-out');
+        }, 500);
+        
+    }, 2500);
+}
+
+document.addEventListener('DOMContentLoaded', startHeroSlideshow);
