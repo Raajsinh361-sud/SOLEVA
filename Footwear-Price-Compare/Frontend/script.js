@@ -999,3 +999,40 @@ function startHeroSlideshow() {
 }
 
 document.addEventListener('DOMContentLoaded', startHeroSlideshow);
+
+
+// ==========================================
+// HERO SHOE AUTO-SWITCHER WITH SAFETY CHECK
+// ==========================================
+document.addEventListener('DOMContentLoaded', () => {
+    // 1. Image element select karo
+    const heroImg = document.querySelector('.hero-shoe-wrap img');
+
+    if (!heroImg) {
+        console.warn("SOLEVA Warning: '.hero-shoe-wrap img' selector nahi mila! HTML me class name check karein.");
+        return;
+    }
+
+    // 2. Apne Assets folder me maujood images ke exact naam aur path dhyan se check karo
+    // Note: Agar aapki index.html Frontend folder ke andar hai, toh path '../Assets/images/' hoga.
+    const heroShoes = [
+        heroImg.getAttribute('src'), // Current image ko 1st image rakhega
+        "../Assets/images/shoe2.png",
+        "../Assets/images/shoe3.png",
+        "../Assets/images/shoe4.png"
+    ];
+
+    let currentIdx = 0;
+
+    // 3. Har 3 seconds (3000ms) me change hoga
+    setInterval(() => {
+        heroImg.classList.add('fade-out');
+
+        setTimeout(() => {
+            currentIdx = (currentIdx + 1) % heroShoes.length;
+            heroImg.src = heroShoes[currentIdx];
+            heroImg.classList.remove('fade-out');
+        }, 500); // 0.5 second fade out time
+
+    }, 3000);
+});
