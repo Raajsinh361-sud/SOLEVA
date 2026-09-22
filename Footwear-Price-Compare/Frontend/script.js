@@ -1001,38 +1001,43 @@ function startHeroSlideshow() {
 document.addEventListener('DOMContentLoaded', startHeroSlideshow);
 
 
-// ==========================================
-// HERO SHOE AUTO-SWITCHER WITH SAFETY CHECK
-// ==========================================
-document.addEventListener('DOMContentLoaded', () => {
-    // 1. Image element select karo
-    const heroImg = document.querySelector('.hero-shoe-wrap img');
 
-    if (!heroImg) {
-        console.warn("SOLEVA Warning: '.hero-shoe-wrap img' selector nahi mila! HTML me class name check karein.");
+
+// ==========================================
+// HERO SHOE AUTO SWITCHER (WITH DEBUG)
+// ==========================================
+window.addEventListener('DOMContentLoaded', () => {
+    // Page par shoe image find karo
+    const shoeImg = document.querySelector('.hero-shoe-wrap img') || document.querySelector('.hero img');
+
+    if (!shoeImg) {
+        console.error("SOLEVA Error: Hero section me <img> tag nahi mila!");
         return;
     }
 
-    // 2. Apne Assets folder me maujood images ke exact naam aur path dhyan se check karo
-    // Note: Agar aapki index.html Frontend folder ke andar hai, toh path '../Assets/images/' hoga.
-    const heroShoes = [
-        heroImg.getAttribute('src'), // Current image ko 1st image rakhega
+    console.log("SOLEVA: Hero Image Tag Found ->", shoeImg.src);
+
+    // Dynamic Image Array (Aapki current image se start hoga)
+    const images = [
+        shoeImg.src,
         "../Assets/images/shoe2.png",
         "../Assets/images/shoe3.png",
         "../Assets/images/shoe4.png"
     ];
 
-    let currentIdx = 0;
+    let currentIndex = 0;
 
-    // 3. Har 3 seconds (3000ms) me change hoga
     setInterval(() => {
-        heroImg.classList.add('fade-out');
-
+        currentIndex = (currentIndex + 1) % images.length;
+        console.log("SOLEVA: Changing image to ->", images[currentIndex]);
+        
+        // Smooth transition
+        shoeImg.style.opacity = '0.3';
+        
         setTimeout(() => {
-            currentIdx = (currentIdx + 1) % heroShoes.length;
-            heroImg.src = heroShoes[currentIdx];
-            heroImg.classList.remove('fade-out');
-        }, 500); // 0.5 second fade out time
+            shoeImg.src = images[currentIndex];
+            shoeImg.style.opacity = '1';
+        }, 300);
 
-    }, 3000);
+    }, 3000); // 3 Seconds
 });
