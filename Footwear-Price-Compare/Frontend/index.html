@@ -1,0 +1,727 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>SOLEVA — Footwear Price Compare</title>
+
+    <link rel="stylesheet" href="style.css">
+
+</head>
+
+
+<body>
+
+
+    <!-- =========================================
+         NAVBAR
+         ========================================= -->
+
+    <header class="navbar">
+
+        <a href="#home" class="logo">
+            SOL<span>EVA</span>
+        </a>
+
+
+        <nav class="nav-links">
+
+            <a href="#home">Home</a>
+
+            <a href="#products">Products</a>
+
+            <a href="#compare">Compare</a>
+
+            <a href="#about">About</a>
+
+        </nav>
+
+
+        <button
+            class="nav-button"
+            type="button"
+            data-scroll="products"
+        >
+            Explore
+        </button>
+
+    </header>
+
+
+
+    <!-- =========================================
+         MAIN
+         ========================================= -->
+
+    <main>
+
+
+        <!-- =====================================
+             HERO
+             ===================================== -->
+
+        <section
+            id="home"
+            class="hero"
+        >
+
+
+            <div class="hero-content">
+
+                <p class="hero-tag">
+                    FIND YOUR PERFECT PAIR
+                </p>
+
+
+                <h1>
+
+                    THE RIGHT
+
+                    <span>FOOTWEAR.</span>
+
+                    <br>
+
+                    THE RIGHT PRICE.
+
+                </h1>
+
+
+                <p class="hero-description">
+
+                    Discover footwear and compare
+                    prices from multiple marketplaces
+                    in one place.
+
+                </p>
+
+
+                <div class="hero-buttons">
+
+                    <button
+                        class="primary-button"
+                        type="button"
+                        data-scroll="products"
+                    >
+                        View Products
+                    </button>
+
+
+                    <button
+                        class="secondary-button"
+                        type="button"
+                        data-scroll="compare"
+                    >
+                        Compare Prices
+                    </button>
+
+                </div>
+
+            </div>
+
+
+
+            <!-- =================================
+                 SHOE DISPLAY
+                 ================================= -->
+
+            <div class="shoe-container">
+
+
+                <div class="orbit orbit-one"></div>
+
+                <div class="orbit orbit-two"></div>
+
+
+                <div class="premium-orb"></div>
+
+                <div class="shoe-glow"></div>
+
+
+                <img
+                    id="shoe-image"
+                    src="../Assets/images/shoe.png"
+                    alt="Featured footwear"
+                >
+
+
+                <!-- SHOE SELECTOR -->
+
+                <div class="shoe-selector">
+
+
+                    <button
+                        class="shoe-select active"
+                        type="button"
+                        data-shoe="1"
+                        data-image="shoe.png"
+                    >
+                        01
+                    </button>
+
+
+                    <button
+                        class="shoe-select"
+                        type="button"
+                        data-shoe="2"
+                        data-image="shoe2.png"
+                    >
+                        02
+                    </button>
+
+
+                    <button
+                        class="shoe-select"
+                        type="button"
+                        data-shoe="3"
+                        data-image="shoe3.png"
+                    >
+                        03
+                    </button>
+
+
+                    <button
+                        class="shoe-select"
+                        type="button"
+                        data-shoe="4"
+                        data-image="shoe4.png"
+                    >
+                        04
+                    </button>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+
+        <!-- =========================================
+             PRODUCTS
+             ========================================= -->
+
+        <section
+            id="products"
+            class="products-section"
+        >
+
+
+            <div class="section-heading">
+
+                <p>
+                    EXPLORE
+                </p>
+
+
+                <h2>
+                    Discover Footwear
+                </h2>
+
+
+                <span class="section-subtitle">
+                    Search and compare footwear from multiple marketplaces.
+                </span>
+
+            </div>
+
+
+
+            <!-- SEARCH -->
+
+            <div class="product-search">
+
+
+                <div class="search-box">
+
+
+                    <span class="search-icon">
+                        ⌕
+                    </span>
+
+
+                    <input
+                        type="text"
+                        id="product-search"
+                        placeholder="Search shoes, sneakers, running shoes..."
+                        autocomplete="off"
+                    >
+
+
+                    <button
+                        id="search-button"
+                        type="button"
+                    >
+                        Search
+                    </button>
+
+                </div>
+
+
+
+                <!-- CATEGORY FILTERS -->
+
+                <div class="product-filters">
+
+
+                    <button
+                        class="filter-button active"
+                        type="button"
+                        data-category="all"
+                    >
+                        All
+                    </button>
+
+
+                    <button
+                        class="filter-button"
+                        type="button"
+                        data-category="sneakers"
+                    >
+                        Sneakers
+                    </button>
+
+
+                    <button
+                        class="filter-button"
+                        type="button"
+                        data-category="running"
+                    >
+                        Running
+                    </button>
+
+
+                    <button
+                        class="filter-button"
+                        type="button"
+                        data-category="casual"
+                    >
+                        Casual
+                    </button>
+
+
+                    <button
+                        class="filter-button"
+                        type="button"
+                        data-category="sports"
+                    >
+                        Sports
+                    </button>
+
+                </div>
+
+            </div>
+
+
+
+  <!-- =========================================
+     PRODUCT CONTROLS
+     ========================================= -->
+
+<div class="product-controls">
+
+    <div class="control-label">
+        Browse
+    </div>
+
+    <!-- CATEGORY -->
+
+    <div
+        class="custom-dropdown"
+        id="category-dropdown"
+    >
+
+        <button
+            type="button"
+            class="custom-dropdown-button"
+        >
+            <span class="dropdown-value">
+                All Categories
+            </span>
+
+            <span class="dropdown-arrow">
+                ⌄
+            </span>
+        </button>
+
+        <div class="custom-dropdown-menu">
+
+            <button
+                type="button"
+                class="custom-option active"
+                data-value="all"
+            >
+                All Categories
+            </button>
+
+            <button
+                type="button"
+                class="custom-option"
+                data-value="sneakers"
+            >
+                Sneakers
+            </button>
+
+            <button
+                type="button"
+                class="custom-option"
+                data-value="running"
+            >
+                Running
+            </button>
+
+            <button
+                type="button"
+                class="custom-option"
+                data-value="casual"
+            >
+                Casual
+            </button>
+
+            <button
+                type="button"
+                class="custom-option"
+                data-value="sports"
+            >
+                Sports
+            </button>
+
+        </div>
+
+    </div>
+
+<!-- SORT -->
+
+    <div
+        class="custom-dropdown"
+        id="sort-dropdown"
+    >
+
+        <button
+            type="button"
+            class="custom-dropdown-button"
+        >
+            <span class="dropdown-value">
+                Sort: Relevance
+            </span>
+
+            <span class="dropdown-arrow">
+                ⌄
+            </span>
+        </button>
+
+        <div class="custom-dropdown-menu">
+
+            <button
+                type="button"
+                class="custom-option active"
+                data-value="relevance"
+            >
+                Sort: Relevance
+            </button>
+
+            <button
+                type="button"
+                class="custom-option"
+                data-value="price-low"
+            >
+                Price: Low to High
+            </button>
+
+            <button
+                type="button"
+                class="custom-option"
+                data-value="price-high"
+            >
+                Price: High to Low
+            </button>
+
+        </div>
+
+    </div>
+
+</div>
+
+    <!-- =========================================
+     PRODUCT GRID
+     ========================================= -->
+
+<div
+    id="products-grid"
+    class="products-grid"
+></div>
+
+
+    
+
+        <!-- =========================================
+             COMPARE
+             ========================================= -->
+
+        <section
+            id="compare"
+            class="compare-section"
+        >
+
+
+            <div class="section-heading">
+
+                <p>
+                    COMPARE
+                </p>
+
+
+                <h2>
+                    Find The Best Price
+                </h2>
+
+
+                <span class="section-subtitle">
+                    Compare marketplace prices before you buy.
+                </span>
+
+            </div>
+
+
+
+            <div class="compare-card">
+
+
+                <div class="compare-icon">
+                    ⇄
+                </div>
+
+
+                <h3>
+                    One Product. Multiple Prices.
+                </h3>
+
+
+                <p>
+                    SOLEVA will bring marketplace offers
+                    together so you can compare them in one place.
+                </p>
+
+
+                <button
+                    class="primary-button"
+                    type="button"
+                    data-scroll="products"
+                >
+                    Start Comparing
+                </button>
+
+            </div>
+
+        </section>
+
+
+
+        <!-- =========================================
+             ABOUT
+             ========================================= -->
+
+        <section
+            id="about"
+            class="about-section"
+        >
+
+
+            <div class="section-heading">
+
+                <p>
+                    ABOUT SOLEVA
+                </p>
+
+
+                <h2>
+
+                    One Place.
+
+                    <span>
+                        Better Choices.
+                    </span>
+
+                </h2>
+
+            </div>
+
+
+            <p class="about-text">
+
+                SOLEVA brings footwear discovery and
+                price comparison together, helping you
+                find products and compare marketplace
+                prices from one clean interface.
+
+            </p>
+
+        </section>
+
+
+    </main>
+
+
+
+    <!-- =========================================
+         FOOTER
+         ========================================= -->
+
+    <footer>
+
+
+        <a
+            href="#home"
+            class="logo"
+        >
+            SOL<span>EVA</span>
+        </a>
+
+
+        <p>
+            © 2026 SOLEVA. All rights reserved.
+        </p>
+
+    </footer>
+
+
+
+   <!-- ========================================== -->
+<!-- SOLEVA PREMIUM PRODUCT DETAILS MODAL -->
+<!-- ========================================== -->
+<div id="product-modal" class="product-modal" aria-hidden="true">
+    <div class="product-modal-backdrop"></div>
+    <div class="product-modal-card" role="dialog" aria-modal="true">
+        
+        <button id="product-modal-close" class="product-modal-close" type="button" aria-label="Close modal">
+            &times;
+        </button>
+
+        <div class="modal-product-image-wrap">
+            <div class="modal-product-glow"></div>
+            <img id="modal-product-image" class="modal-product-image" src="" alt="Product">
+        </div>
+
+        <div class="modal-product-info">
+            <span class="modal-product-badge">SOLEVA VERIFIED</span>
+            <span id="modal-product-category" class="modal-product-category">RUNNING</span>
+            
+            <h2 id="modal-product-name" class="modal-product-name">Velocity Runner</h2>
+            <p id="modal-product-description" class="modal-product-description">Lightweight everyday running footwear.</p>
+
+            <div class="modal-product-price-card">
+                <span class="price-label">Starting from</span>
+                <span id="modal-product-price" class="modal-product-price">₹2,999</span>
+            </div>
+
+            <div class="marketplace-section">
+                <p class="marketplace-title">COMPARE MARKETPLACE PRICES</p>
+                
+                <div class="marketplace-buttons-grid">
+                    <div class="marketplace-card amazon-card">
+                        <div class="store-info">
+                            <span class="store-name">Amazon</span>
+                            <span class="store-status">Check live offer</span>
+                        </div>
+                        <button class="store-btn amazon-btn" type="button">
+                            View Deal &rarr;
+                        </button>
+                    </div>
+
+                    <div class="marketplace-card flipkart-card">
+                        <div class="store-info">
+                            <span class="store-name">Flipkart</span>
+                            <span class="store-status">Check live offer</span>
+                        </div>
+                        <button class="store-btn flipkart-btn" type="button">
+                            View Deal &rarr;
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <p class="modal-disclaimer">
+                Marketplace prices will be connected through official affiliate/API data.
+            </p>
+        </div>
+
+    </div>
+</div>
+
+
+
+<!-- ========================================== -->
+<!-- SOLEVA PREMIUM PRODUCT DETAILS MODAL -->
+<!-- ========================================== -->
+<div id="product-modal" class="product-modal" aria-hidden="true">
+    <div class="product-modal-backdrop"></div>
+    <div class="product-modal-card" role="dialog" aria-modal="true">
+        
+        <button id="product-modal-close" class="product-modal-close" type="button" aria-label="Close modal">
+            &times;
+        </button>
+
+        <div class="modal-product-image-wrap">
+            <div class="modal-product-glow"></div>
+            <img id="modal-product-image" class="modal-product-image" src="" alt="Product">
+        </div>
+
+        <div class="modal-product-info">
+            <span class="modal-product-badge">SOLEVA VERIFIED</span>
+            <span id="modal-product-category" class="modal-product-category">RUNNING</span>
+            
+            <h2 id="modal-product-name" class="modal-product-name">Velocity Runner</h2>
+            <p id="modal-product-description" class="modal-product-description">Lightweight everyday running footwear.</p>
+
+            <div class="modal-product-price-card">
+                <span class="price-label">Starting from</span>
+                <span id="modal-product-price" class="modal-product-price">₹2,999</span>
+            </div>
+
+            <div class="marketplace-section">
+                <p class="marketplace-title">COMPARE MARKETPLACE PRICES</p>
+                
+                <div class="marketplace-buttons-grid">
+                    <div class="marketplace-card amazon-card">
+                        <div class="store-info">
+                            <span class="store-name">Amazon</span>
+                            <span class="store-status">Check live offer</span>
+                        </div>
+                        <a id="modal-amazon-link" href="#" target="_blank" class="store-btn amazon-btn">
+                            View Deal &rarr;
+                        </a>
+                    </div>
+
+                    <div class="marketplace-card flipkart-card">
+                        <div class="store-info">
+                            <span class="store-name">Flipkart</span>
+                            <span class="store-status">Check live offer</span>
+                        </div>
+                        <a id="modal-flipkart-link" href="#" target="_blank" class="store-btn flipkart-btn">
+                            View Deal &rarr;
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <p class="modal-disclaimer">
+                Marketplace prices will be connected through official affiliate/API data.
+            </p>
+        </div>
+
+    </div>
+</div>
+
+
+
+    <script src="script.js"></script>
+
+</body>
+
+</html>
