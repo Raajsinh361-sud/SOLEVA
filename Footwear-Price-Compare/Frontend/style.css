@@ -3446,3 +3446,15 @@ footer p {
         gap: 10px;
     }
 }
+
+
+/* Hero Shoe Auto-Switch Animation */
+.hero-shoe-wrap img {
+    transition: opacity 0.5s ease-in-out, transform 0.5s ease-in-out;
+    opacity: 1;
+}
+
+.hero-shoe-wrap img.fade-out {
+    opacity: 0;
+    transform: scale(0.95);
+}
