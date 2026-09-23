@@ -79,8 +79,101 @@ document.addEventListener("DOMContentLoaded", () => {
        SHOE SELECTOR
        ========================================= */
 
-    const shoeImage =
-        document.getElementById("shoe-image");
+    /* =========================================
+   SOLEVA — PREMIUM HERO SHOE MOTION
+   ========================================= */
+
+#shoe-image {
+    cursor: pointer;
+
+    animation: premiumShoeFloat 4.5s ease-in-out infinite;
+
+    transition:
+        opacity 0.55s ease,
+        transform 0.55s ease,
+        filter 0.55s ease;
+}
+
+/* Floating shoe animation */
+@keyframes premiumShoeFloat {
+
+    0%,
+    100% {
+        transform: translateY(0px);
+    }
+
+    50% {
+        transform: translateY(-14px);
+    }
+}
+
+
+/* Smooth image change state */
+#shoe-image.shoe-changing {
+    opacity: 0;
+    transform:
+        translateY(-6px)
+        scale(0.96);
+
+    filter:
+        blur(4px);
+}
+
+
+/* Slight premium hover */
+#shoe-image:hover {
+    transform:
+        translateY(-8px)
+        scale(1.02);
+}
+
+
+/* Selector buttons */
+.shoe-selector button {
+    position: relative;
+    overflow: hidden;
+}
+
+
+/* Active selector */
+.shoe-selector button.active {
+    box-shadow:
+        0 0 20px var(--theme-glow),
+        0 0 45px var(--theme-glow-soft);
+}
+
+
+/* Progress line inside active selector */
+.shoe-selector button.active::after {
+    content: "";
+
+    position: absolute;
+
+    left: 0;
+    bottom: 0;
+
+    height: 2px;
+    width: 100%;
+
+    background: var(--theme-accent);
+
+    transform-origin: left;
+
+    animation:
+        shoeSelectorProgress 7s linear forwards;
+}
+
+
+@keyframes shoeSelectorProgress {
+
+    from {
+        transform: scaleX(0);
+    }
+
+    to {
+        transform: scaleX(1);
+    }
+}
 
     const shoeButtons =
         document.querySelectorAll(".shoe-select");
