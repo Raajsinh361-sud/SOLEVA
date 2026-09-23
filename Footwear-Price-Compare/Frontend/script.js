@@ -173,7 +173,8 @@ document.addEventListener("DOMContentLoaded", () => {
             price: 2999,
             image: "../Assets/images/shoe.png",
             description:
-                "Lightweight everyday running footwear."
+                "Lightweight everyday running footwear.",
+            amazonUrl: "https://www.amazon.in/SPARX-Sports-Shoe-SM-680-Grey/dp/B098B8YCZ2?th=1&psc=1&linkCode=ll2&tag=solevaindia-21&linkId=be53fcc034b6e3a1fff9db1ab6e59359&ref_=as_li_ss_tl"
         },
 
         {
@@ -184,8 +185,7 @@ document.addEventListener("DOMContentLoaded", () => {
             image: "../Assets/images/shoe2.png",
             description:
                 "Clean streetwear style for everyday use."
-           },
-      
+        },
 
         {
             id: 3,
@@ -966,159 +966,4 @@ document.addEventListener(
 
     renderProducts();
 
-});
-
-
-// ==========================================
-// HERO SHOE AUTO SHOWCASE (2.5 SECONDS)
-// ==========================================
-const heroShoeImages = [
-    "../Assets/images/shoe.png",
-    "../Assets/images/shoe2.png",
-    "../Assets/images/shoe3.png",
-    "../Assets/images/shoe4.png"
-];
-
-let currentHeroIndex = 0;
-
-function startHeroSlideshow() {
-    const heroImageElement = document.querySelector('.hero-shoe-wrap img');
-    
-    if (!heroImageElement) return;
-
-    setInterval(() => {
-        heroImageElement.classList.add('fade-out');
-
-        setTimeout(() => {
-            currentHeroIndex = (currentHeroIndex + 1) % heroShoeImages.length;
-            heroImageElement.src = heroShoeImages[currentHeroIndex];
-            heroImageElement.classList.remove('fade-out');
-        }, 500);
-        
-    }, 2500);
-}
-
-document.addEventListener('DOMContentLoaded', startHeroSlideshow);
-
-
-
-
-// ==========================================
-// HERO SHOE AUTO SWITCHER (WITH DEBUG)
-// ==========================================
-window.addEventListener('DOMContentLoaded', () => {
-    // Page par shoe image find karo
-    const shoeImg = document.querySelector('.hero-shoe-wrap img') || document.querySelector('.hero img');
-
-    if (!shoeImg) {
-        console.error("SOLEVA Error: Hero section me <img> tag nahi mila!");
-        return;
-    }
-
-    console.log("SOLEVA: Hero Image Tag Found ->", shoeImg.src);
-
-    // Dynamic Image Array (Aapki current image se start hoga)
-    const images = [
-        shoeImg.src,
-        "../Assets/images/shoe2.png",
-        "../Assets/images/shoe3.png",
-        "../Assets/images/shoe4.png"
-    ];
-
-    let currentIndex = 0;
-
-    setInterval(() => {
-        currentIndex = (currentIndex + 1) % images.length;
-        console.log("SOLEVA: Changing image to ->", images[currentIndex]);
-        
-        // Smooth transition
-        shoeImg.style.opacity = '0.3';
-        
-        setTimeout(() => {
-            shoeImg.src = images[currentIndex];
-            shoeImg.style.opacity = '1';
-        }, 300);
-
-    }, 3000); // 3 Seconds
-});
-
-
-
-
-
-// ==========================================
-// SOLEVA CAROUSEL & INTERACTION LOGIC
-// ==========================================
-document.addEventListener('DOMContentLoaded', () => {
-    const heroShoe = document.getElementById('heroShoeImg') || document.querySelector('.hero-shoe-wrap img');
-    const indicators = document.querySelectorAll('.indicator-btn');
-    
-    // Images list
-    const shoeList = [
-        heroShoe ? heroShoe.src : "../Assets/images/shoe.png",
-        "../Assets/images/shoe2.png",
-        "../Assets/images/shoe3.png",
-        "../Assets/images/shoe4.png"
-    ];
-
-    let currentIdx = 0;
-    let autoTimer = null;
-
-    // 1. Function to Switch Shoe & Sync Indicator
-    function switchSlide(index) {
-        if (!heroShoe) return;
-
-        // Start Fade Out
-        heroShoe.classList.add('shoe-fade-out');
-
-        // Update Active Indicator Bar (Left-to-Right Green Transfer)
-        indicators.forEach((btn, i) => {
-            if (i === index) {
-                btn.classList.add('active');
-            } else {
-                btn.classList.remove('active');
-            }
-        });
-
-        setTimeout(() => {
-            currentIdx = index;
-            heroShoe.src = shoeList[currentIdx];
-            
-            // Fade In
-            heroShoe.classList.remove('shoe-fade-out');
-        }, 500); // 0.5s fade delay
-    }
-
-    // 2. Start 5-Second Cycle
-    function startAutoLoop() {
-        if (autoTimer) clearInterval(autoTimer);
-        autoTimer = setInterval(() => {
-            let nextIdx = (currentIdx + 1) % shoeList.length;
-            switchSlide(nextIdx);
-        }, 5000); // Exactly 5 Seconds
-    }
-
-    // 3. Manual Tap on 01, 02, 03, 04 Pills
-    indicators.forEach((btn, idx) => {
-        btn.addEventListener('click', () => {
-            switchSlide(idx);
-            startAutoLoop(); // Reset 5-sec timer on manual click
-        });
-    });
-
-    // 4. Touch Shoe -> Smooth Transfer to Discover Footwear Section
-    if (heroShoe) {
-        heroShoe.addEventListener('click', () => {
-            const productSection = document.querySelector('#products') || 
-                                   document.querySelector('.discover-section') || 
-                                   document.querySelector('main');
-            
-            if (productSection) {
-                productSection.scrollIntoView({ behavior: 'smooth' });
-            }
-        });
-    }
-
-    // Start Showcase
-    startAutoLoop();
 });
