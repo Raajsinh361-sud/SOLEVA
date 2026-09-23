@@ -3643,3 +3643,673 @@ footer p {
         transform: scaleX(1);
     }
 }
+
+
+/* =========================================
+   SOLEVA — NAVBAR ACTION BUTTONS
+   ========================================= */
+
+.nav-actions {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+
+/* Glass icon button */
+
+.nav-icon-btn {
+    position: relative;
+
+    width: 42px;
+    height: 42px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border: 1px solid rgba(255, 255, 255, 0.10);
+    border-radius: 50%;
+
+    background:
+        rgba(255, 255, 255, 0.045);
+
+    color: rgba(255, 255, 255, 0.82);
+
+    font-size: 18px;
+
+    cursor: pointer;
+
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+
+    transition:
+        transform 0.25s ease,
+        border-color 0.25s ease,
+        background 0.25s ease,
+        color 0.25s ease,
+        box-shadow 0.25s ease;
+}
+
+
+/* Hover */
+
+.nav-icon-btn:hover {
+    transform: translateY(-2px);
+
+    color: var(--theme-accent);
+
+    border-color:
+        var(--theme-accent);
+
+    background:
+        rgba(255, 255, 255, 0.075);
+
+    box-shadow:
+        0 8px 25px var(--theme-glow);
+}
+
+
+/* Click */
+
+.nav-icon-btn:active {
+    transform: scale(0.94);
+}
+
+
+/* Cart number */
+
+.cart-count {
+    position: absolute;
+
+    top: -4px;
+    right: -3px;
+
+    min-width: 17px;
+    height: 17px;
+
+    padding: 0 4px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 50%;
+
+    background:
+        var(--theme-accent);
+
+    color: #111;
+
+    font-size: 10px;
+    font-weight: 800;
+
+    box-shadow:
+        0 0 12px var(--theme-glow);
+}
+
+
+/* Account button */
+
+.account-btn {
+    font-size: 17px;
+}
+
+
+/* Mobile */
+
+@media (max-width: 768px) {
+
+    .nav-actions {
+        gap: 6px;
+    }
+
+    .nav-icon-btn {
+        width: 38px;
+        height: 38px;
+        font-size: 16px;
+    }
+
+    .explore-btn {
+        display: none;
+    }
+}
+
+
+/* =========================================
+   SOLEVA — PREMIUM NAV ICONS
+   ========================================= */
+
+.nav-icon-btn svg {
+    width: 19px;
+    height: 19px;
+
+    fill: none;
+
+    stroke: currentColor;
+    stroke-width: 1.6;
+
+    stroke-linecap: round;
+    stroke-linejoin: round;
+
+    display: block;
+
+    transition:
+        transform 0.25s ease,
+        filter 0.25s ease;
+}
+
+
+/* Premium hover */
+
+.nav-icon-btn:hover svg {
+    transform: scale(1.08);
+
+    filter:
+        drop-shadow(0 0 7px var(--theme-glow));
+}
+
+
+/* Wishlist */
+
+#wishlist-btn:hover {
+    color: var(--theme-accent);
+}
+
+
+/* Cart */
+
+#cart-btn:hover {
+    color: var(--theme-accent);
+}
+
+
+/* Account */
+
+#account-btn:hover {
+    color: var(--theme-accent);
+}
+
+
+
+/* =========================================
+   SOLEVA — SIGN IN POPUP
+   ========================================= */
+
+.auth-overlay {
+    position: fixed;
+    inset: 0;
+
+    z-index: 9999;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    padding: 20px;
+
+    background:
+        rgba(0, 0, 0, 0.72);
+
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+
+    opacity: 0;
+    visibility: hidden;
+
+    transition:
+        opacity 0.3s ease,
+        visibility 0.3s ease;
+}
+
+
+/* Open state */
+
+.auth-overlay.active {
+    opacity: 1;
+    visibility: visible;
+}
+
+
+/* Modal */
+
+.auth-modal {
+    position: relative;
+
+    width: min(100%, 430px);
+
+    padding: 38px;
+
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    border-radius: 24px;
+
+    background:
+        linear-gradient(
+            145deg,
+            rgba(30, 30, 30, 0.96),
+            rgba(12, 12, 12, 0.96)
+        );
+
+    box-shadow:
+        0 30px 100px rgba(0, 0, 0, 0.65),
+        0 0 70px var(--theme-glow-soft);
+
+    transform:
+        translateY(20px)
+        scale(0.96);
+
+    transition:
+        transform 0.35s ease;
+}
+
+
+.auth-overlay.active .auth-modal {
+    transform:
+        translateY(0)
+        scale(1);
+}
+
+
+/* Close */
+
+.auth-close {
+    position: absolute;
+
+    top: 16px;
+    right: 16px;
+
+    width: 34px;
+    height: 34px;
+
+    border: 1px solid rgba(255, 255, 255, 0.10);
+    border-radius: 50%;
+
+    background: rgba(255, 255, 255, 0.04);
+
+    color: rgba(255, 255, 255, 0.65);
+
+    font-size: 22px;
+    line-height: 1;
+
+    cursor: pointer;
+
+    transition: 0.25s ease;
+}
+
+
+.auth-close:hover {
+    color: var(--theme-accent);
+
+    border-color:
+        var(--theme-accent);
+
+    transform: rotate(90deg);
+}
+
+
+/* Logo */
+
+.auth-logo {
+    margin-bottom: 22px;
+
+    font-size: 22px;
+    font-weight: 800;
+
+    letter-spacing: 3px;
+
+    color: white;
+}
+
+
+.auth-logo span {
+    color: var(--theme-accent);
+}
+
+
+/* Heading */
+
+.auth-heading {
+    margin-bottom: 26px;
+}
+
+
+.auth-heading h2 {
+    margin: 0 0 8px;
+
+    font-size: 28px;
+    font-weight: 700;
+
+    color: white;
+}
+
+
+.auth-heading p {
+    margin: 0;
+
+    color:
+        rgba(255, 255, 255, 0.52);
+
+    font-size: 14px;
+    line-height: 1.6;
+}
+
+
+/* Fields */
+
+.auth-field {
+    margin-bottom: 18px;
+}
+
+
+.auth-field label {
+    display: block;
+
+    margin-bottom: 8px;
+
+    color:
+        rgba(255, 255, 255, 0.72);
+
+    font-size: 13px;
+}
+
+
+.auth-field input {
+    width: 100%;
+
+    height: 50px;
+
+    padding: 0 15px;
+
+    border: 1px solid rgba(255, 255, 255, 0.10);
+    border-radius: 12px;
+
+    outline: none;
+
+    background:
+        rgba(255, 255, 255, 0.045);
+
+    color: white;
+
+    font-size: 14px;
+
+    transition:
+        border-color 0.25s ease,
+        box-shadow 0.25s ease,
+        background 0.25s ease;
+
+    box-sizing: border-box;
+}
+
+
+.auth-field input::placeholder {
+    color:
+        rgba(255, 255, 255, 0.30);
+}
+
+
+.auth-field input:focus {
+    border-color:
+        var(--theme-accent);
+
+    background:
+        rgba(255, 255, 255, 0.065);
+
+    box-shadow:
+        0 0 0 3px var(--theme-glow-soft);
+}
+
+
+/* Password */
+
+.password-wrapper {
+    position: relative;
+}
+
+
+.password-wrapper input {
+    padding-right: 48px;
+}
+
+
+.password-toggle {
+    position: absolute;
+
+    top: 50%;
+    right: 12px;
+
+    transform: translateY(-50%);
+
+    border: 0;
+
+    background: transparent;
+
+    color:
+        rgba(255, 255, 255, 0.42);
+
+    cursor: pointer;
+}
+
+
+.password-toggle svg {
+    width: 19px;
+    height: 19px;
+
+    fill: none;
+
+    stroke: currentColor;
+    stroke-width: 1.5;
+
+    stroke-linecap: round;
+    stroke-linejoin: round;
+}
+
+
+.password-toggle:hover {
+    color: var(--theme-accent);
+}
+
+
+/* Forgot */
+
+.auth-options {
+    display: flex;
+    justify-content: flex-end;
+
+    margin: -5px 0 20px;
+}
+
+
+.forgot-password {
+    border: 0;
+
+    padding: 0;
+
+    background: transparent;
+
+    color:
+        var(--theme-accent);
+
+    font-size: 12px;
+
+    cursor: pointer;
+}
+
+
+/* Submit */
+
+.auth-submit {
+    width: 100%;
+
+    height: 50px;
+
+    border: 0;
+    border-radius: 12px;
+
+    background:
+        var(--theme-accent);
+
+    color: #101010;
+
+    font-size: 14px;
+    font-weight: 800;
+
+    cursor: pointer;
+
+    box-shadow:
+        0 10px 30px var(--theme-glow);
+
+    transition:
+        transform 0.25s ease,
+        box-shadow 0.25s ease;
+}
+
+
+.auth-submit:hover {
+    transform: translateY(-2px);
+
+    box-shadow:
+        0 14px 40px var(--theme-glow);
+}
+
+
+/* Divider */
+
+.auth-divider {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+
+    margin: 25px 0;
+}
+
+
+.auth-divider::before,
+.auth-divider::after {
+    content: "";
+
+    flex: 1;
+
+    height: 1px;
+
+    background:
+        rgba(255, 255, 255, 0.09);
+}
+
+
+.auth-divider span {
+    color:
+        rgba(255, 255, 255, 0.32);
+
+    font-size: 10px;
+}
+
+
+/* Google */
+
+.google-signin {
+    width: 100%;
+
+    height: 48px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+
+    border: 1px solid rgba(255, 255, 255, 0.10);
+    border-radius: 12px;
+
+    background:
+        rgba(255, 255, 255, 0.045);
+
+    color:
+        rgba(255, 255, 255, 0.82);
+
+    font-size: 13px;
+
+    cursor: pointer;
+
+    transition:
+        background 0.25s ease,
+        border-color 0.25s ease;
+}
+
+
+.google-signin:hover {
+    background:
+        rgba(255, 255, 255, 0.075);
+
+    border-color:
+        rgba(255, 255, 255, 0.20);
+}
+
+
+.google-icon {
+    font-weight: 800;
+    font-size: 17px;
+}
+
+
+/* Create account */
+
+.auth-create {
+    margin: 23px 0 0;
+
+    text-align: center;
+
+    color:
+        rgba(255, 255, 255, 0.45);
+
+    font-size: 12px;
+}
+
+
+.auth-create button {
+    border: 0;
+
+    padding: 0;
+
+    background: transparent;
+
+    color:
+        var(--theme-accent);
+
+    font-weight: 700;
+
+    cursor: pointer;
+}
+
+
+/* Mobile */
+
+@media (max-width: 480px) {
+
+    .auth-modal {
+        padding: 30px 22px;
+
+        border-radius: 20px;
+    }
+
+    .auth-heading h2 {
+        font-size: 25px;
+    }
+}
+
+
+
+
+/* =========================================
+   SOLEVA — SIGN IN / SIGN UP SWITCH
+   ========================================= */
+
+.auth-signup-view {
+    display: none;
+}
+
+.auth-modal.signup-mode .auth-signin-view {
+    display: none;
+}
+
+.auth-modal.signup-mode .auth-signup-view {
+    display: block;
+}
