@@ -4313,3 +4313,293 @@ footer p {
 .auth-modal.signup-mode .auth-signup-view {
     display: block;
 }
+
+
+
+
+
+
+
+
+/* =========================================
+   SOLEVA — MOBILE EXPERIENCE V1
+   STEP 1: MOBILE NAVBAR + SPACING
+   ========================================= */
+
+@media (max-width: 600px) {
+
+    /* ==============================
+       NAVBAR
+       ============================== */
+
+    .navbar {
+        top: 10px;
+        width: calc(100% - 20px);
+        height: 58px;
+
+        padding: 0 12px;
+
+        border-radius: 16px;
+    }
+
+
+    /* Logo */
+
+    .logo {
+        font-size: 17px;
+        letter-spacing: 1.2px;
+    }
+
+
+    /* Hide desktop navigation */
+
+    .nav-links {
+        display: none;
+    }
+
+
+    /* Navbar actions */
+
+    .nav-actions {
+        display: flex;
+        align-items: center;
+        gap: 6px;
+    }
+
+
+    /* Navbar icon buttons */
+
+    .nav-icon-btn {
+        width: 38px;
+        height: 38px;
+
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        padding: 0;
+
+        border: 1px solid
+            rgba(255, 255, 255, 0.08);
+
+        border-radius: 11px;
+
+        background:
+            rgba(255, 255, 255, 0.035);
+
+        color: #FFFFFF;
+
+        cursor: pointer;
+
+        flex-shrink: 0;
+    }
+
+
+    .nav-icon-btn svg {
+        width: 17px;
+        height: 17px;
+    }
+
+
+    /* Explore button */
+
+    .nav-button {
+        min-height: 38px;
+
+        padding:
+            0 12px;
+
+        border-radius: 10px;
+
+        font-size: 11px;
+    }
+
+
+    /* ==============================
+       HERO
+       ============================== */
+
+    .hero {
+        min-height: auto;
+
+        padding:
+            115px 20px 55px;
+
+        gap: 10px;
+    }
+
+
+    .hero-content {
+        width: 100%;
+    }
+
+
+    .hero-tag {
+        font-size: 9px;
+        letter-spacing: 2px;
+
+        margin-bottom: 15px;
+    }
+
+
+    .hero-content h1 {
+        font-size:
+            clamp(38px, 11vw, 48px);
+
+        line-height: 0.98;
+
+        letter-spacing: -2px;
+    }
+
+
+    .hero-description {
+        max-width: 330px;
+
+        margin-top: 20px;
+
+        font-size: 13px;
+
+        line-height: 1.65;
+    }
+
+
+    /* Hero buttons */
+
+    .hero-buttons {
+        width: 100%;
+
+        margin-top: 25px;
+
+        display: flex;
+
+        flex-direction: column;
+
+        gap: 10px;
+    }
+
+
+    .primary-button,
+    .secondary-button {
+        width: 100%;
+
+        min-height: 48px;
+    }
+
+
+    /* ==============================
+       SHOE AREA
+       ============================== */
+
+    .shoe-container {
+        width: 100%;
+
+        min-height: 370px;
+
+        margin-top: 5px;
+    }
+
+
+    #shoe-image {
+        width: 94%;
+
+        max-height: 340px;
+    }
+
+
+    .premium-orb {
+        width: 220px;
+        height: 220px;
+
+        filter: blur(50px);
+    }
+
+
+    .shoe-glow {
+        width: 320px;
+        height: 230px;
+
+        filter: blur(22px);
+    }
+
+
+    .orbit {
+        width: 300px;
+        height: 115px;
+    }
+
+
+    .orbit-two {
+        width: 350px;
+        height: 135px;
+    }
+
+
+    /* Shoe selector */
+
+    .shoe-selector {
+        bottom: 0;
+
+        padding: 6px;
+
+        gap: 5px;
+    }
+
+
+    .shoe-select {
+        width: 40px;
+        height: 34px;
+
+        font-size: 11px;
+    }
+
+
+    /* ==============================
+       SECTIONS
+       ============================== */
+
+    .products-section,
+    .compare-section,
+    .about-section {
+        padding:
+            75px 18px;
+    }
+
+
+    .section-heading {
+        margin-bottom: 30px;
+    }
+
+
+    .section-heading p {
+        font-size: 9px;
+        letter-spacing: 2.5px;
+    }
+
+
+    .section-heading h2 {
+        font-size:
+            clamp(32px, 9vw, 44px);
+
+        letter-spacing: -1.5px;
+    }
+
+
+    .section-subtitle {
+        font-size: 12px;
+
+        line-height: 1.6;
+    }
+
+
+    /* ==============================
+       FOOTER
+       ============================== */
+
+    footer {
+        padding:
+            30px 20px;
+
+        text-align: center;
+    }
+
+}
