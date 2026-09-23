@@ -87,10 +87,6 @@ document.addEventListener("DOMContentLoaded", () => {
         document.querySelectorAll(".shoe-select");
 
 
-    /* =========================================
-       HERO SHOE IMAGES
-       ========================================= */
-
     const shoeImages = [
 
         "../Assets/images/shoe.png",
@@ -100,10 +96,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
     ];
 
-
-    /* =========================================
-       CURRENT HERO SHOE
-       ========================================= */
 
     let currentShoe = 0;
 
@@ -126,8 +118,6 @@ document.addEventListener("DOMContentLoaded", () => {
             shoeImages.length;
 
 
-        /* Fade OUT */
-
         if (animate) {
 
             shoeImage.classList.add(
@@ -143,20 +133,14 @@ document.addEventListener("DOMContentLoaded", () => {
 
         setTimeout(() => {
 
-            /* Change image */
-
             shoeImage.src =
                 shoeImages[currentShoe];
 
-
-            /* Change theme */
 
             applyShoeTheme(
                 currentShoe + 1
             );
 
-
-            /* Update selector */
 
             shoeButtons.forEach(
                 (button, buttonIndex) => {
@@ -169,8 +153,6 @@ document.addEventListener("DOMContentLoaded", () => {
                 }
             );
 
-
-            /* Fade IN */
 
             requestAnimationFrame(() => {
 
@@ -243,8 +225,6 @@ document.addEventListener("DOMContentLoaded", () => {
                     );
 
 
-                    /* Restart 7-second timer */
-
                     startShoeSlider();
 
                 }
@@ -255,7 +235,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
     /* =========================================
-       HERO SHOE CLICK → PRODUCTS
+       HERO SHOE → PRODUCTS
        ========================================= */
 
     if (shoeImage) {
@@ -416,10 +396,6 @@ document.addEventListener("DOMContentLoaded", () => {
             ".filter-button"
         );
 
-
-    /* =========================================
-       CUSTOM DROPDOWNS
-       ========================================= */
 
     const categoryDropdown =
         document.getElementById(
@@ -721,8 +697,6 @@ document.addEventListener("DOMContentLoaded", () => {
                     );
 
 
-                    /* Update category dropdown */
-
                     if (
                         categoryDropdown
                     ) {
@@ -772,7 +746,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
     /* =========================================
-       CATEGORY CUSTOM DROPDOWN
+       CATEGORY DROPDOWN
        ========================================= */
 
     if (categoryDropdown) {
@@ -891,7 +865,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
     /* =========================================
-       SORT CUSTOM DROPDOWN
+       SORT DROPDOWN
        ========================================= */
 
     if (sortDropdown) {
@@ -1077,10 +1051,6 @@ document.addEventListener("DOMContentLoaded", () => {
         );
 
 
-    /* =========================================
-       OPEN PRODUCT MODAL
-       ========================================= */
-
     function openProductModal(product) {
 
         if (!productModal) return;
@@ -1147,10 +1117,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
     }
 
-
-    /* =========================================
-       CLOSE PRODUCT MODAL
-       ========================================= */
 
     function closeProductModal() {
 
@@ -1220,10 +1186,6 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
 
-    /* =========================================
-       CLOSE MODAL BUTTON
-       ========================================= */
-
     if (productModalClose) {
 
         productModalClose.addEventListener(
@@ -1233,10 +1195,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
     }
 
-
-    /* =========================================
-       MODAL BACKDROP
-       ========================================= */
 
     if (productModalBackdrop) {
 
@@ -1249,7 +1207,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
     /* =========================================
-       ESCAPE KEY
+       PRODUCT MODAL ESCAPE
        ========================================= */
 
     document.addEventListener(
@@ -1265,6 +1223,221 @@ document.addEventListener("DOMContentLoaded", () => {
             ) {
 
                 closeProductModal();
+
+            }
+
+        }
+    );
+
+
+    /* =========================================
+       👤 SIGN IN POPUP
+       ========================================= */
+
+    const accountButton =
+        document.getElementById(
+            "account-btn"
+        );
+
+
+    const authOverlay =
+        document.getElementById(
+            "auth-overlay"
+        );
+
+
+    const authClose =
+        document.getElementById(
+            "auth-close"
+        );
+
+
+    const signInForm =
+        document.getElementById(
+            "sign-in-form"
+        );
+
+
+    const passwordToggle =
+        document.getElementById(
+            "password-toggle"
+        );
+
+
+    const passwordInput =
+        document.getElementById(
+            "signin-password"
+        );
+
+
+        const authModal = document.querySelector(".auth-modal");
+
+const createAccountButton =
+    document.getElementById("create-account-btn");
+
+const backToSignin =
+    document.getElementById("back-to-signin");
+
+
+    /* OPEN ACCOUNT */
+
+    if (
+        accountButton &&
+        authOverlay
+    ) {
+
+        accountButton.addEventListener(
+            "click",
+            () => {
+
+                authOverlay.classList.add(
+                    "active"
+                );
+
+                document.body.style.overflow =
+                    "hidden";
+
+            }
+        );
+
+        createAccountButton?.addEventListener("click", () => {
+    authModal.classList.add("signup-mode");
+});
+
+backToSignin?.addEventListener("click", () => {
+    authModal.classList.remove("signup-mode");
+});
+
+    }
+
+
+    /* CLOSE ACCOUNT */
+
+    function closeAuthPopup() {
+
+        if (!authOverlay) return;
+
+
+        authOverlay.classList.remove(
+            "active"
+        );
+
+
+        document.body.style.overflow =
+            "";
+
+    }
+
+
+    if (authClose) {
+
+        authClose.addEventListener(
+            "click",
+            closeAuthPopup
+        );
+
+    }
+
+
+    /* CLICK OUTSIDE */
+
+    if (authOverlay) {
+
+        authOverlay.addEventListener(
+            "click",
+            (event) => {
+
+                if (
+                    event.target ===
+                    authOverlay
+                ) {
+
+                    closeAuthPopup();
+
+                }
+
+            }
+        );
+
+    }
+
+
+    /* PASSWORD SHOW / HIDE */
+
+    if (
+        passwordToggle &&
+        passwordInput
+    ) {
+
+        passwordToggle.addEventListener(
+            "click",
+            () => {
+
+                const isPassword =
+                    passwordInput.type ===
+                    "password";
+
+
+                passwordInput.type =
+                    isPassword
+                        ? "text"
+                        : "password";
+
+
+                passwordToggle.setAttribute(
+                    "aria-label",
+                    isPassword
+                        ? "Hide password"
+                        : "Show password"
+                );
+
+            }
+        );
+
+    }
+
+
+    /* SIGN IN FORM */
+
+    if (signInForm) {
+
+        signInForm.addEventListener(
+            "submit",
+            (event) => {
+
+                event.preventDefault();
+
+
+                /*
+                 * Real authentication
+                 * will be connected later.
+                 */
+
+                alert(
+                    "SOLEVA Sign In\n\nReal account authentication will be connected here."
+                );
+
+            }
+        );
+
+    }
+
+
+    /* ESCAPE FOR AUTH POPUP */
+
+    document.addEventListener(
+        "keydown",
+        (event) => {
+
+            if (
+                event.key === "Escape" &&
+                authOverlay &&
+                authOverlay.classList.contains(
+                    "active"
+                )
+            ) {
+
+                closeAuthPopup();
 
             }
 
