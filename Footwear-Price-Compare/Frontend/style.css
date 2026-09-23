@@ -3285,7 +3285,6 @@ footer p {
     }
 }
 
-
 /* ==========================================
    SOLEVA - MOBILE & TABLET RESPONSIVE FIXES
 ========================================== */
@@ -3378,6 +3377,7 @@ footer p {
         line-height: 1.3;
         display: -webkit-box;
         -webkit-line-clamp: 2;
+        line-clamp: 2;
         -webkit-box-orient: vertical;
         overflow: hidden;
         margin-bottom: 8px;
@@ -3445,143 +3445,4 @@ footer p {
         grid-template-columns: repeat(2, 1fr);
         gap: 10px;
     }
-}
-
-
-/* Hero Shoe Auto-Switch Animation */
-.hero-shoe-wrap img {
-    transition: opacity 0.5s ease-in-out, transform 0.5s ease-in-out;
-    opacity: 1;
-}
-
-.hero-shoe-wrap img.fade-out {
-    opacity: 0;
-    transform: scale(0.95);
-}
-
-
-
-/* ==========================================
-   HERO SHOE FLOATING & FADE ANIMATION
-========================================== */
-
-/* Shoe ko hawa me float karwane ka container */
-.hero-shoe-wrap {
-    animation: floatShoe 3.5s ease-in-out infinite;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-
-.hero-shoe-wrap img {
-    transition: opacity 0.5s ease, transform 0.5s ease;
-    opacity: 1;
-    max-width: 100%;
-    filter: drop-shadow(0px 15px 25px rgba(0, 0, 0, 0.6));
-}
-
-/* Jab shoe badle tab Halki si rotate + fade-out animation */
-.hero-shoe-wrap img.fade-out {
-    opacity: 0;
-    transform: scale(0.9) rotate(-6deg);
-}
-
-/* Floating Keyframes */
-@keyframes floatShoe {
-    0% {
-        transform: translateY(0px) rotate(0deg);
-    }
-    50% {
-        transform: translateY(-16px) rotate(-2deg); /* Smoothly upar jayega */
-    }
-    100% {
-        transform: translateY(0px) rotate(0deg);  /* Wapas niche aayega */
-    }
-/* ==========================================
-   PURE CSS FLOATING ANIMATION
-========================================== */
-.hero-shoe-wrap, 
-.hero-shoe-wrap img, 
-.hero-image-wrap img {
-    animation: floatAnimation 3s ease-in-out infinite !important;
-}
-
-@keyframes floatAnimation {
-    0% {
-        transform: translateY(0px) rotate(0deg);
-    }
-    50% {
-        transform: translateY(-18px) rotate(-3deg); /* Shoe 18px upar float karega */
-    }
-    100% {
-        transform: translateY(0px) rotate(0deg); /* Wapas original position */
-    }
-}
-
-
-
-
-/* ==========================================
-   SOLEVA ULTIMATE FLOATING & PILL ANIMATION
-========================================== */
-
-/* 1. Shoe Floating Effect (Continuous & Smooth) */
-.hero-shoe-wrap img, 
-#heroShoeImg {
-    cursor: pointer;
-    animation: solevaFloat 3.8s ease-in-out infinite !important;
-    transition: opacity 0.6s cubic-bezier(0.4, 0, 0.2, 1), transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
-    will-change: transform, opacity;
-}
-
-@keyframes solevaFloat {
-    0% {
-        transform: translateY(0px) rotate(0deg);
-    }
-    50% {
-        transform: translateY(-18px) rotate(-3deg); /* Hawa me float karega */
-    }
-    100% {
-        transform: translateY(0px) rotate(0deg);
-    }
-}
-
-/* 2. Shoe Smooth Fade-Out & Transition */
-.shoe-fade-out {
-    opacity: 0 !important;
-    transform: translateY(22px) scale(0.92) rotate(-6deg) !important;
-}
-
-/* 3. Black Pill Container (Matching Screenshot) */
-.pill-indicator-bar {
-    display: inline-flex;
-    align-items: center;
-    background: rgba(18, 22, 18, 0.85);
-    border: 1px solid rgba(136, 255, 0, 0.25);
-    border-radius: 30px;
-    padding: 5px 8px;
-    gap: 6px;
-    margin-top: 1.5rem;
-    backdrop-filter: blur(10px);
-}
-
-/* Indicator Buttons (01, 02, 03, 04) */
-.indicator-btn {
-    background: transparent;
-    border: none;
-    color: #8a8d9b;
-    font-size: 0.8rem;
-    font-weight: 700;
-    padding: 6px 14px;
-    border-radius: 20px;
-    cursor: pointer;
-    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-}
-
-/* Left-to-Right Green Active Transfer Effect */
-.indicator-btn.active {
-    background: #88ff00; /* Exact Soleva Green */
-    color: #000000;
-    box-shadow: 0 0 15px rgba(136, 255, 0, 0.6);
-    transform: scale(1.08);
 }
