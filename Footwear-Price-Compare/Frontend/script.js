@@ -5,6 +5,7 @@
 
 document.addEventListener("DOMContentLoaded", () => {
 
+
     /* =========================================
        SHOE THEMES
        ========================================= */
@@ -76,152 +77,224 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
     /* =========================================
-       SHOE SELECTOR
+       HERO SHOE ELEMENTS
        ========================================= */
 
-    /* =========================================
-   SOLEVA — PREMIUM HERO SHOE MOTION
-   ========================================= */
-
-#shoe-image {
-    cursor: pointer;
-
-    animation: premiumShoeFloat 4.5s ease-in-out infinite;
-
-    transition:
-        opacity 0.55s ease,
-        transform 0.55s ease,
-        filter 0.55s ease;
-}
-
-/* Floating shoe animation */
-@keyframes premiumShoeFloat {
-
-    0%,
-    100% {
-        transform: translateY(0px);
-    }
-
-    50% {
-        transform: translateY(-14px);
-    }
-}
-
-
-/* Smooth image change state */
-#shoe-image.shoe-changing {
-    opacity: 0;
-    transform:
-        translateY(-6px)
-        scale(0.96);
-
-    filter:
-        blur(4px);
-}
-
-
-/* Slight premium hover */
-#shoe-image:hover {
-    transform:
-        translateY(-8px)
-        scale(1.02);
-}
-
-
-/* Selector buttons */
-.shoe-selector button {
-    position: relative;
-    overflow: hidden;
-}
-
-
-/* Active selector */
-.shoe-selector button.active {
-    box-shadow:
-        0 0 20px var(--theme-glow),
-        0 0 45px var(--theme-glow-soft);
-}
-
-
-/* Progress line inside active selector */
-.shoe-selector button.active::after {
-    content: "";
-
-    position: absolute;
-
-    left: 0;
-    bottom: 0;
-
-    height: 2px;
-    width: 100%;
-
-    background: var(--theme-accent);
-
-    transform-origin: left;
-
-    animation:
-        shoeSelectorProgress 7s linear forwards;
-}
-
-
-@keyframes shoeSelectorProgress {
-
-    from {
-        transform: scaleX(0);
-    }
-
-    to {
-        transform: scaleX(1);
-    }
-}
+    const shoeImage =
+        document.getElementById("shoe-image");
 
     const shoeButtons =
         document.querySelectorAll(".shoe-select");
 
 
-    shoeButtons.forEach((button) => {
+    /* =========================================
+       HERO SHOE IMAGES
+       ========================================= */
 
-        button.addEventListener("click", () => {
+    const shoeImages = [
 
-            const number =
-                Number(button.dataset.shoe);
+        "../Assets/images/shoe.png",
+        "../Assets/images/shoe2.png",
+        "../Assets/images/shoe3.png",
+        "../Assets/images/shoe4.png"
 
-            const image =
-                button.dataset.image;
-
-
-            if (shoeImage) {
-
-                shoeImage.style.opacity = "0";
-
-                setTimeout(() => {
-
-                    shoeImage.src =
-                        `../Assets/images/${image}`;
-
-                    shoeImage.style.opacity = "1";
-
-                }, 180);
-
-            }
+    ];
 
 
-            shoeButtons.forEach((item) => {
+    /* =========================================
+       CURRENT HERO SHOE
+       ========================================= */
 
-                item.classList.remove("active");
+    let currentShoe = 0;
+
+    let shoeTimer = null;
+
+
+    /* =========================================
+       SHOW HERO SHOE
+       ========================================= */
+
+    function showShoe(index, animate = true) {
+
+        if (!shoeImage) return;
+
+        if (!shoeImages.length) return;
+
+
+        currentShoe =
+            (index + shoeImages.length) %
+            shoeImages.length;
+
+
+        /* Fade OUT */
+
+        if (animate) {
+
+            shoeImage.classList.add(
+                "shoe-changing"
+            );
+
+        }
+
+
+        const changeDelay =
+            animate ? 500 : 0;
+
+
+        setTimeout(() => {
+
+            /* Change image */
+
+            shoeImage.src =
+                shoeImages[currentShoe];
+
+
+            /* Change theme */
+
+            applyShoeTheme(
+                currentShoe + 1
+            );
+
+
+            /* Update selector */
+
+            shoeButtons.forEach(
+                (button, buttonIndex) => {
+
+                    button.classList.toggle(
+                        "active",
+                        buttonIndex === currentShoe
+                    );
+
+                }
+            );
+
+
+            /* Fade IN */
+
+            requestAnimationFrame(() => {
+
+                shoeImage.classList.remove(
+                    "shoe-changing"
+                );
 
             });
 
-            button.classList.add("active");
 
-            applyShoeTheme(number);
+        }, changeDelay);
 
-        });
-
-    });
+    }
 
 
-    applyShoeTheme(1);
+    /* =========================================
+       NEXT HERO SHOE
+       ========================================= */
+
+    function nextShoe() {
+
+        const nextIndex =
+            (currentShoe + 1) %
+            shoeImages.length;
+
+
+        showShoe(
+            nextIndex,
+            true
+        );
+
+    }
+
+
+    /* =========================================
+       START AUTO SLIDER
+       ========================================= */
+
+    function startShoeSlider() {
+
+        clearInterval(
+            shoeTimer
+        );
+
+
+        shoeTimer =
+            setInterval(() => {
+
+                nextShoe();
+
+            }, 7000);
+
+    }
+
+
+    /* =========================================
+       MANUAL SHOE SELECTOR
+       ========================================= */
+
+    shoeButtons.forEach(
+        (button, index) => {
+
+            button.addEventListener(
+                "click",
+                () => {
+
+                    showShoe(
+                        index,
+                        true
+                    );
+
+
+                    /* Restart 7-second timer */
+
+                    startShoeSlider();
+
+                }
+            );
+
+        }
+    );
+
+
+    /* =========================================
+       HERO SHOE CLICK → PRODUCTS
+       ========================================= */
+
+    if (shoeImage) {
+
+        shoeImage.addEventListener(
+            "click",
+            () => {
+
+                const productsSection =
+                    document.getElementById(
+                        "products"
+                    );
+
+
+                if (!productsSection) return;
+
+
+                productsSection.scrollIntoView({
+                    behavior: "smooth",
+                    block: "start"
+                });
+
+            }
+        );
+
+    }
+
+
+    /* =========================================
+       INITIAL HERO SHOE
+       ========================================= */
+
+    showShoe(
+        0,
+        false
+    );
+
+
+    startShoeSlider();
 
 
     /* =========================================
@@ -229,28 +302,40 @@ document.addEventListener("DOMContentLoaded", () => {
        ========================================= */
 
     const scrollButtons =
-        document.querySelectorAll("[data-scroll]");
+        document.querySelectorAll(
+            "[data-scroll]"
+        );
 
 
-    scrollButtons.forEach((button) => {
+    scrollButtons.forEach(
+        (button) => {
 
-        button.addEventListener("click", () => {
+            button.addEventListener(
+                "click",
+                () => {
 
-            const targetId =
-                button.dataset.scroll;
+                    const targetId =
+                        button.dataset.scroll;
 
-            const target =
-                document.getElementById(targetId);
 
-            if (!target) return;
+                    const target =
+                        document.getElementById(
+                            targetId
+                        );
 
-            target.scrollIntoView({
-                behavior: "smooth"
-            });
 
-        });
+                    if (!target) return;
 
-    });
+
+                    target.scrollIntoView({
+                        behavior: "smooth"
+                    });
+
+                }
+            );
+
+        }
+    );
 
 
     /* =========================================
@@ -267,7 +352,8 @@ document.addEventListener("DOMContentLoaded", () => {
             image: "../Assets/images/shoe.png",
             description:
                 "Lightweight everyday running footwear.",
-            amazonUrl: "https://www.amazon.in/SPARX-Sports-Shoe-SM-680-Grey/dp/B098B8YCZ2?th=1&psc=1&linkCode=ll2&tag=solevaindia-21&linkId=be53fcc034b6e3a1fff9db1ab6e59359&ref_=as_li_ss_tl"
+            amazonUrl:
+                "https://www.amazon.in/SPARX-Sports-Shoe-SM-680-Grey/dp/B098B8YCZ2?th=1&psc=1&linkCode=ll2&tag=solevaindia-21&linkId=be53fcc034b6e3a1fff9db1ab6e59359&ref_=as_li_ss_tl"
         },
 
         {
@@ -308,25 +394,43 @@ document.addEventListener("DOMContentLoaded", () => {
        ========================================= */
 
     const productGrid =
-        document.getElementById("products-grid");
+        document.getElementById(
+            "products-grid"
+        );
+
 
     const searchInput =
-        document.getElementById("product-search");
+        document.getElementById(
+            "product-search"
+        );
+
 
     const searchButton =
-        document.getElementById("search-button");
+        document.getElementById(
+            "search-button"
+        );
+
 
     const filterButtons =
-        document.querySelectorAll(".filter-button");
+        document.querySelectorAll(
+            ".filter-button"
+        );
 
 
-    /* CUSTOM DROPDOWNS */
+    /* =========================================
+       CUSTOM DROPDOWNS
+       ========================================= */
 
     const categoryDropdown =
-        document.getElementById("category-dropdown");
+        document.getElementById(
+            "category-dropdown"
+        );
+
 
     const sortDropdown =
-        document.getElementById("sort-dropdown");
+        document.getElementById(
+            "sort-dropdown"
+        );
 
 
     let currentCategory = "all";
@@ -371,61 +475,78 @@ document.addEventListener("DOMContentLoaded", () => {
         }
 
 
-        let filtered = [...products];
+        let filtered =
+            [...products];
 
 
         /* SEARCH */
 
         if (currentSearch) {
 
-            filtered = filtered.filter((product) => {
+            filtered =
+                filtered.filter(
+                    (product) => {
 
-                const text =
-                    `${product.name}
-                    ${product.category}
-                    ${product.description}`
-                        .toLowerCase();
+                        const text =
+                            `${product.name}
+                            ${product.category}
+                            ${product.description}`
+                                .toLowerCase();
 
-                return text.includes(currentSearch);
 
-            });
+                        return text.includes(
+                            currentSearch
+                        );
+
+                    }
+                );
 
         }
 
 
         /* CATEGORY */
 
-        if (currentCategory !== "all") {
+        if (
+            currentCategory !== "all"
+        ) {
 
-            filtered = filtered.filter(
-                (product) =>
-                    product.category === currentCategory
-            );
+            filtered =
+                filtered.filter(
+                    (product) =>
+                        product.category ===
+                        currentCategory
+                );
 
         }
 
 
         /* SORT */
 
-        if (currentSort === "price-low") {
+        if (
+            currentSort === "price-low"
+        ) {
 
             filtered.sort(
-                (a, b) => a.price - b.price
+                (a, b) =>
+                    a.price - b.price
             );
 
         }
 
 
-        if (currentSort === "price-high") {
+        if (
+            currentSort === "price-high"
+        ) {
 
             filtered.sort(
-                (a, b) => b.price - a.price
+                (a, b) =>
+                    b.price - a.price
             );
 
         }
 
 
-        /* EMPTY */
+        /* EMPTY STATE */
 
         if (!filtered.length) {
 
@@ -456,59 +577,65 @@ document.addEventListener("DOMContentLoaded", () => {
 
         /* PRODUCT CARDS */
 
-        productGrid.innerHTML = filtered.map(
-            (product) => `
+        productGrid.innerHTML =
+            filtered.map(
+                (product) => `
 
-                <article class="product-card">
+                    <article class="product-card">
 
-                    <div class="product-image-wrap">
+                        <div class="product-image-wrap">
 
-                        <img
-                            class="product-image"
-                            src="${product.image}"
-                            alt="${product.name}"
-                        >
-
-                    </div>
-
-
-                    <div class="product-info">
-
-                        <div class="product-category">
-                            ${product.category}
-                        </div>
-
-                        <h3 class="product-name">
-                            ${product.name}
-                        </h3>
-
-                        <p class="product-description">
-                            ${product.description}
-                        </p>
-
-
-                        <div class="product-bottom">
-
-                            <span class="product-price">
-                                ${formatPrice(product.price)}
-                            </span>
-
-                            <button
-                                class="product-view"
-                                type="button"
-                                data-product="${product.id}"
+                            <img
+                                class="product-image"
+                                src="${product.image}"
+                                alt="${product.name}"
                             >
-                                View
-                            </button>
 
                         </div>
 
-                    </div>
 
-                </article>
+                        <div class="product-info">
 
-            `
-        ).join("");
+                            <div class="product-category">
+                                ${product.category}
+                            </div>
+
+
+                            <h3 class="product-name">
+                                ${product.name}
+                            </h3>
+
+
+                            <p class="product-description">
+                                ${product.description}
+                            </p>
+
+
+                            <div class="product-bottom">
+
+                                <span class="product-price">
+                                    ${formatPrice(
+                                        product.price
+                                    )}
+                                </span>
+
+
+                                <button
+                                    class="product-view"
+                                    type="button"
+                                    data-product="${product.id}"
+                                >
+                                    View
+                                </button>
+
+                            </div>
+
+                        </div>
+
+                    </article>
+
+                `
+            ).join("");
 
     }
 
@@ -521,10 +648,12 @@ document.addEventListener("DOMContentLoaded", () => {
 
         if (!searchInput) return;
 
+
         currentSearch =
             searchInput.value
                 .trim()
                 .toLowerCase();
+
 
         renderProducts();
 
@@ -547,7 +676,9 @@ document.addEventListener("DOMContentLoaded", () => {
             "keydown",
             (event) => {
 
-                if (event.key === "Enter") {
+                if (
+                    event.key === "Enter"
+                ) {
 
                     performSearch();
 
@@ -563,68 +694,81 @@ document.addEventListener("DOMContentLoaded", () => {
        FILTER BUTTONS
        ========================================= */
 
-    filterButtons.forEach((button) => {
+    filterButtons.forEach(
+        (button) => {
 
-        button.addEventListener(
-            "click",
-            () => {
+            button.addEventListener(
+                "click",
+                () => {
 
-                currentCategory =
-                    button.dataset.category;
-
-
-                filterButtons.forEach((item) => {
-
-                    item.classList.remove("active");
-
-                });
+                    currentCategory =
+                        button.dataset.category;
 
 
-                button.classList.add("active");
+                    filterButtons.forEach(
+                        (item) => {
+
+                            item.classList.remove(
+                                "active"
+                            );
+
+                        }
+                    );
 
 
-                /* Update custom category text */
+                    button.classList.add(
+                        "active"
+                    );
 
-                if (categoryDropdown) {
 
-                    const value =
-                        categoryDropdown.querySelector(
-                            ".dropdown-value"
+                    /* Update category dropdown */
+
+                    if (
+                        categoryDropdown
+                    ) {
+
+                        const value =
+                            categoryDropdown.querySelector(
+                                ".dropdown-value"
+                            );
+
+
+                        const options =
+                            categoryDropdown.querySelectorAll(
+                                ".custom-option"
+                            );
+
+
+                        if (value) {
+
+                            value.textContent =
+                                button.textContent.trim();
+
+                        }
+
+
+                        options.forEach(
+                            (option) => {
+
+                                option.classList.toggle(
+                                    "active",
+                                    option.dataset.value ===
+                                    currentCategory
+                                );
+
+                            }
                         );
-
-                    const options =
-                        categoryDropdown.querySelectorAll(
-                            ".custom-option"
-                        );
-
-
-                    if (value) {
-
-                        value.textContent =
-                            button.textContent.trim();
 
                     }
 
 
-                    options.forEach((option) => {
-
-                        option.classList.toggle(
-                            "active",
-                            option.dataset.value ===
-                            currentCategory
-                        );
-
-                    });
+                    renderProducts();
 
                 }
+            );
 
-
-                renderProducts();
-
-            }
-        );
-
-    });
+        }
+    );
 
 
     /* =========================================
@@ -638,10 +782,12 @@ document.addEventListener("DOMContentLoaded", () => {
                 ".custom-dropdown-button"
             );
 
+
         const categoryValue =
             categoryDropdown.querySelector(
                 ".dropdown-value"
             );
+
 
         const categoryOptions =
             categoryDropdown.querySelectorAll(
@@ -657,9 +803,11 @@ document.addEventListener("DOMContentLoaded", () => {
 
                     event.stopPropagation();
 
+
                     categoryDropdown.classList.toggle(
                         "open"
                     );
+
 
                     if (sortDropdown) {
 
@@ -675,64 +823,69 @@ document.addEventListener("DOMContentLoaded", () => {
         }
 
 
-        categoryOptions.forEach((option) => {
+        categoryOptions.forEach(
+            (option) => {
 
-            option.addEventListener(
-                "click",
-                (event) => {
+                option.addEventListener(
+                    "click",
+                    (event) => {
 
-                    event.stopPropagation();
-
-                    currentCategory =
-                        option.dataset.value;
+                        event.stopPropagation();
 
 
-                    if (categoryValue) {
+                        currentCategory =
+                            option.dataset.value;
 
-                        categoryValue.textContent =
-                            option.textContent.trim();
+
+                        if (categoryValue) {
+
+                            categoryValue.textContent =
+                                option.textContent.trim();
+
+                        }
+
+
+                        categoryOptions.forEach(
+                            (item) => {
+
+                                item.classList.remove(
+                                    "active"
+                                );
+
+                            }
+                        );
+
+
+                        option.classList.add(
+                            "active"
+                        );
+
+
+                        filterButtons.forEach(
+                            (button) => {
+
+                                button.classList.toggle(
+                                    "active",
+                                    button.dataset.category ===
+                                    currentCategory
+                                );
+
+                            }
+                        );
+
+
+                        categoryDropdown.classList.remove(
+                            "open"
+                        );
+
+
+                        renderProducts();
 
                     }
+                );
 
-
-                    categoryOptions.forEach(
-                        (item) => {
-
-                            item.classList.remove(
-                                "active"
-                            );
-
-                        }
-                    );
-
-
-                    option.classList.add("active");
-
-
-                    filterButtons.forEach(
-                        (button) => {
-
-                            button.classList.toggle(
-                                "active",
-                                button.dataset.category ===
-                                currentCategory
-                            );
-
-                        }
-                    );
-
-
-                    categoryDropdown.classList.remove(
-                        "open"
-                    );
-
-
-                    renderProducts();
-
-                }
-            );
-
-        });
+            }
+        );
 
     }
 
@@ -748,10 +901,12 @@ document.addEventListener("DOMContentLoaded", () => {
                 ".custom-dropdown-button"
             );
 
+
         const sortValue =
             sortDropdown.querySelector(
                 ".dropdown-value"
             );
+
 
         const sortOptions =
             sortDropdown.querySelectorAll(
@@ -766,6 +921,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 (event) => {
 
                     event.stopPropagation();
+
 
                     sortDropdown.classList.toggle(
                         "open"
@@ -786,51 +942,56 @@ document.addEventListener("DOMContentLoaded", () => {
         }
 
 
-        sortOptions.forEach((option) => {
+        sortOptions.forEach(
+            (option) => {
 
-            option.addEventListener(
-                "click",
-                (event) => {
+                option.addEventListener(
+                    "click",
+                    (event) => {
 
-                    event.stopPropagation();
-
-                    currentSort =
-                        option.dataset.value;
+                        event.stopPropagation();
 
 
-                    if (sortValue) {
-
-                        sortValue.textContent =
-                            option.textContent.trim();
-
-                    }
+                        currentSort =
+                            option.dataset.value;
 
 
-                    sortOptions.forEach(
-                        (item) => {
+                        if (sortValue) {
 
-                            item.classList.remove(
-                                "active"
-                            );
+                            sortValue.textContent =
+                                option.textContent.trim();
 
                         }
-                    );
 
 
-                    option.classList.add("active");
+                        sortOptions.forEach(
+                            (item) => {
+
+                                item.classList.remove(
+                                    "active"
+                                );
+
+                            }
+                        );
 
 
-                    sortDropdown.classList.remove(
-                        "open"
-                    );
+                        option.classList.add(
+                            "active"
+                        );
 
 
-                    renderProducts();
+                        sortDropdown.classList.remove(
+                            "open"
+                        );
 
-                }
-            );
 
-        });
+                        renderProducts();
+
+                    }
+                );
+
+            }
+        );
 
     }
 
@@ -851,6 +1012,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
             }
 
+
             if (sortDropdown) {
 
                 sortDropdown.classList.remove(
@@ -863,194 +1025,251 @@ document.addEventListener("DOMContentLoaded", () => {
     );
 
 
-   /* =========================================
-   PRODUCT DETAILS MODAL
-   ========================================= */
+    /* =========================================
+       PRODUCT DETAILS MODAL
+       ========================================= */
 
-const productModal =
-    document.getElementById(
-        "product-modal"
-    );
-
-const productModalClose =
-    document.getElementById(
-        "product-modal-close"
-    );
-
-const productModalBackdrop =
-    document.querySelector(
-        ".product-modal-backdrop"
-    );
-
-const modalProductImage =
-    document.getElementById(
-        "modal-product-image"
-    );
-
-const modalProductCategory =
-    document.getElementById(
-        "modal-product-category"
-    );
-
-const modalProductName =
-    document.getElementById(
-        "modal-product-name"
-    );
-
-const modalProductDescription =
-    document.getElementById(
-        "modal-product-description"
-    );
-
-const modalProductPrice =
-    document.getElementById(
-        "modal-product-price"
-    );
+    const productModal =
+        document.getElementById(
+            "product-modal"
+        );
 
 
-/* OPEN MODAL */
-
-function openProductModal(product) {
-
-    if (!productModal) return;
-
-    modalProductImage.src =
-        product.image;
-
-    modalProductImage.alt =
-        product.name;
-
-    modalProductCategory.textContent =
-        product.category;
-
-    modalProductName.textContent =
-        product.name;
-
-    modalProductDescription.textContent =
-        product.description;
-
-    modalProductPrice.textContent =
-        formatPrice(product.price);
-
-    productModal.classList.add(
-        "active"
-    );
-
-    productModal.setAttribute(
-        "aria-hidden",
-        "false"
-    );
-
-    document.body.style.overflow =
-        "hidden";
-
-}
+    const productModalClose =
+        document.getElementById(
+            "product-modal-close"
+        );
 
 
-/* CLOSE MODAL */
-
-function closeProductModal() {
-
-    if (!productModal) return;
-
-    productModal.classList.remove(
-        "active"
-    );
-
-    productModal.setAttribute(
-        "aria-hidden",
-        "true"
-    );
-
-    document.body.style.overflow =
-        "";
-
-}
+    const productModalBackdrop =
+        document.querySelector(
+            ".product-modal-backdrop"
+        );
 
 
-/* VIEW BUTTON */
+    const modalProductImage =
+        document.getElementById(
+            "modal-product-image"
+        );
 
-if (productGrid) {
 
-    productGrid.addEventListener(
-        "click",
-        (event) => {
+    const modalProductCategory =
+        document.getElementById(
+            "modal-product-category"
+        );
 
-            const button =
-                event.target.closest(
-                    ".product-view"
-                );
 
-            if (!button) return;
+    const modalProductName =
+        document.getElementById(
+            "modal-product-name"
+        );
 
-            const productId =
-                Number(
-                    button.dataset.product
-                );
 
-            const product =
-                products.find(
-                    (item) =>
-                        item.id ===
-                        productId
-                );
+    const modalProductDescription =
+        document.getElementById(
+            "modal-product-description"
+        );
 
-            if (!product) return;
 
-            openProductModal(
-                product
-            );
+    const modalProductPrice =
+        document.getElementById(
+            "modal-product-price"
+        );
+
+
+    /* =========================================
+       OPEN PRODUCT MODAL
+       ========================================= */
+
+    function openProductModal(product) {
+
+        if (!productModal) return;
+
+
+        if (modalProductImage) {
+
+            modalProductImage.src =
+                product.image;
+
+            modalProductImage.alt =
+                product.name;
 
         }
-    );
-
-}
 
 
-/* CLOSE BUTTON */
+        if (modalProductCategory) {
 
-if (productModalClose) {
-
-    productModalClose.addEventListener(
-        "click",
-        closeProductModal
-    );
-
-}
-
-
-/* BACKDROP CLICK */
-
-if (productModalBackdrop) {
-
-    productModalBackdrop.addEventListener(
-        "click",
-        closeProductModal
-    );
-
-}
-
-
-/* ESC KEY */
-
-document.addEventListener(
-    "keydown",
-    (event) => {
-
-        if (
-            event.key === "Escape" &&
-            productModal &&
-            productModal.classList.contains(
-                "active"
-            )
-        ) {
-
-            closeProductModal();
+            modalProductCategory.textContent =
+                product.category;
 
         }
+
+
+        if (modalProductName) {
+
+            modalProductName.textContent =
+                product.name;
+
+        }
+
+
+        if (modalProductDescription) {
+
+            modalProductDescription.textContent =
+                product.description;
+
+        }
+
+
+        if (modalProductPrice) {
+
+            modalProductPrice.textContent =
+                formatPrice(
+                    product.price
+                );
+
+        }
+
+
+        productModal.classList.add(
+            "active"
+        );
+
+
+        productModal.setAttribute(
+            "aria-hidden",
+            "false"
+        );
+
+
+        document.body.style.overflow =
+            "hidden";
 
     }
-);
+
+
+    /* =========================================
+       CLOSE PRODUCT MODAL
+       ========================================= */
+
+    function closeProductModal() {
+
+        if (!productModal) return;
+
+
+        productModal.classList.remove(
+            "active"
+        );
+
+
+        productModal.setAttribute(
+            "aria-hidden",
+            "true"
+        );
+
+
+        document.body.style.overflow =
+            "";
+
+    }
+
+
+    /* =========================================
+       PRODUCT VIEW BUTTON
+       ========================================= */
+
+    if (productGrid) {
+
+        productGrid.addEventListener(
+            "click",
+            (event) => {
+
+                const button =
+                    event.target.closest(
+                        ".product-view"
+                    );
+
+
+                if (!button) return;
+
+
+                const productId =
+                    Number(
+                        button.dataset.product
+                    );
+
+
+                const product =
+                    products.find(
+                        (item) =>
+                            item.id ===
+                            productId
+                    );
+
+
+                if (!product) return;
+
+
+                openProductModal(
+                    product
+                );
+
+            }
+        );
+
+    }
+
+
+    /* =========================================
+       CLOSE MODAL BUTTON
+       ========================================= */
+
+    if (productModalClose) {
+
+        productModalClose.addEventListener(
+            "click",
+            closeProductModal
+        );
+
+    }
+
+
+    /* =========================================
+       MODAL BACKDROP
+       ========================================= */
+
+    if (productModalBackdrop) {
+
+        productModalBackdrop.addEventListener(
+            "click",
+            closeProductModal
+        );
+
+    }
+
+
+    /* =========================================
+       ESCAPE KEY
+       ========================================= */
+
+    document.addEventListener(
+        "keydown",
+        (event) => {
+
+            if (
+                event.key === "Escape" &&
+                productModal &&
+                productModal.classList.contains(
+                    "active"
+                )
+            ) {
+
+                closeProductModal();
+
+            }
+
+        }
+    );
 
 
     /* =========================================
